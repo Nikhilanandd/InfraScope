@@ -20,17 +20,19 @@ InfraScope is a production-grade CLI tool that performs comprehensive hardware d
 ## Quick Start
 
 ```bash
-# Install with uv (recommended)
-uv tool install infrascope
-
-# Or install from source
-git clone https://github.com/Nikhilanandd/InfraScope.git
-cd InfraScope
-uv sync
-source .venv/bin/activate
+# Install from source with uv (recommended)
+git clone <repo-url>
+cd infrascope
+uv tool install --force .
+infrascope scan
 
 # Or use the install script (auto-detects uv/pip)
 ./install.sh
+
+# Or for development (editable install with venv)
+uv sync
+source .venv/bin/activate
+infrascope scan
 
 # Run a quick scan
 infrascope scan
