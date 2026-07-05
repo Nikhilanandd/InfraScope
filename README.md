@@ -24,8 +24,8 @@ InfraScope is a production-grade CLI tool that performs comprehensive hardware d
 uv tool install infrascope
 
 # Or install from source
-git clone https://github.com/yourusername/infrascope.git
-cd infrascope
+git clone https://github.com/Nikhilanandd/InfraScope.git
+cd InfraScope
 uv sync
 source .venv/bin/activate
 
@@ -152,4 +152,4 @@ src/infrascope/
 
 ## License
 
-MIT
+[GNU General Public License v3.0 (GPLv3)](LICENSE)
