@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infrascope"
+version = "1.0.0"
+description = "Advanced Linux System Hardware & Performance Analyzer"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [
+    { name = "InfraScope Team" },
+]
+keywords = ["linux", "hardware", "system-analysis", "benchmark", "infrastructure"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Hardware",
+    "Topic :: System :: Benchmark",
+    "Topic :: System :: Systems Administration",
+]
+
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.7.0",
+    "psutil>=5.9.0",
+    "py-cpuinfo>=9.0.0",
+    "gputil>=1.4.0",
+]
+
+[project.optional-dependencies]
+sm = ["pySMART>=1.0"]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0",
+    "mypy>=1.8.0",
+]
+pdf = [
+    "fpdf2>=2.7.0",
+]
+all = [
+    "infrascope[dev,pdf]",
+]
+
+[project.scripts]
+infrascope = "infrascope.main:app"
+
+[project.entry-points."infrascope.collectors"]
+cpu = "infrascope.collectors.cpu"
+memory = "infrascope.collectors.memory"
+gpu = "infrascope.collectors.gpu"
+storage = "infrascope.collectors.storage"
+network = "infrascope.collectors.network"
+motherboard = "infrascope.collectors.motherboard"
+cooling = "infrascope.collectors.cooling"
+power = "infrascope.collectors.power"
+usb = "infrascope.collectors.usb"
+pci = "infrascope.collectors.pci"
+monitors = "infrascope.collectors.monitors"
+audio = "infrascope.collectors.audio"
+virtualization = "infrascope.collectors.virtualization"
+filesystem = "infrascope.collectors.filesystem"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infrascope"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = false
+ignore_missing_imports = true
+
+[tool.uv]
+package = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
